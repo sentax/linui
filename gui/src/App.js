@@ -1,4 +1,5 @@
 import './App.css';
+import 'xterm/css/xterm.css';
 import io from 'socket.io-client'
 import PlatformComponent from './containers/Platform'
 import { v4 } from 'uuid'
@@ -9,11 +10,13 @@ class Platform {
     this.socket = socket;
   }
 
-  command(cmd) {
+  command(cmd,cb) {
     const id = v4();
     //register event
     this.socket.on(id, (res) => {
-      console.log(res);
+      if(cb){
+        cb(res)
+      }
       if (res.ended === id) {
         this.socket.off(id)
       }
