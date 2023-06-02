@@ -1,9 +1,11 @@
-html,body,#root{
-    height:100%;
-    width:100%;
-    margin:0;
-    padding:0;
-    overflow:hidden;
+html,
+body,
+#root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
     background-color: #f5f5f5;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -14,4 +16,45 @@ html,body,#root{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;
+}
+
+#root{
+
+    background-image: url('/public/wallpapers/wall1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #242424;
+    width: 100%;
+    z-index: 10;
+}
+
+.taskbar-item {
+    display: inline-block;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.slide-dialog {
+    position: absolute;
+    z-index: 9;
+}
+
+.taskbar-search {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: #202020;
+    color: #fff;
+    font-size: 14px;
 }

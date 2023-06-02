@@ -16,8 +16,20 @@ class TaskManager {
         this.platform = platform;
         this.apps = zustand((set) => ({
             apps: [],
+            list: [],
             runApp: (app) => set(state => ({ apps: [...state.apps, new Application(this, app)] })),
         }));
+        this.xDialog = zustand(
+            (set) => ({
+                state: 'closed',
+                toggle: () => set(state => ({ state: state.state === 'closed' ? 'open' : 'closed' }))
+            })
+        )
+        this.ToggleXDialog = this.ToggleXDialog.bind(this);
+    }
+
+    ToggleXDialog() {
+        this.xDialog.getState().toggle()
     }
 }
 
