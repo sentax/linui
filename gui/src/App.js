@@ -2,31 +2,9 @@ import './App.css';
 import 'xterm/css/xterm.css';
 import io from 'socket.io-client'
 import PlatformComponent from './containers/Platform'
-import { v4 } from 'uuid'
 import { useState, useEffect, useRef } from 'react'
-
-class Platform {
-  constructor(socket) {
-    this.socket = socket;
-  }
-
-  command(cmd,cb) {
-    const id = v4();
-    //register event
-    this.socket.on(id, (res) => {
-      if(cb){
-        cb(res)
-      }
-      if (res.ended === id) {
-        this.socket.off(id)
-      }
-    })
-
-    this.socket.emit("command", { id, cmd });
-
-  }
-}
-
+import { Platform } from './utlis/Classes';
+import { AppContext } from './utlis/appContext';
 
 function App() {
   const [loaded, setLoaded] = useState(null)
@@ -46,7 +24,9 @@ function App() {
 
     loaded
       ?
-      <PlatformComponent platform={platform.current} />
+      <AppContext.Provider value={platform.current}>
+        <PlatformComponent platform={platform.current} />
+      </AppContext.Provider>
       :
       <div className="loader">
         Loading....
