@@ -2,9 +2,12 @@ import Taskbar from "./Taskbar"
 import { useContext } from "react"
 import { AppContext } from "../../utlis/appContext"
 import SlideDialog from "../../components/SlideDialog"
+import WindowHolder from "./WindowHolder"
+
 const XDialog = () => {
     const platform = useContext(AppContext)
     const xDialog = platform.TaskManager.xDialog()
+    const apps = platform.TaskManager.apps()
 
     return <SlideDialog value={xDialog.state} style={{
         left: 6,
@@ -21,6 +24,14 @@ const XDialog = () => {
             padding: 30,
         }}>
             <input type="search" className="taskbar-search" />
+
+            {apps.list.map((app, i) => {
+                return <button key={i} onClick={() => {
+                    apps.runApp(app)
+                }}>
+                    {app.title}
+                </button>
+            })}
 
         </div>
         <div style={{
@@ -44,6 +55,7 @@ export default () => {
         <div>
             <Taskbar />
             <XDialog />
+            <WindowHolder />
         </div>
     )
 

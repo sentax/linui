@@ -7,6 +7,12 @@ class Application {
         this.taskManager = taskManager;
         this.config = config;
         this.id = v4();
+
+        document.dispatchEvent(new CustomEvent('appRunned', {
+            detail: {
+                app: this
+            }
+        }))
     }
 
 }
@@ -16,7 +22,10 @@ class TaskManager {
         this.platform = platform;
         this.apps = zustand((set) => ({
             apps: [],
-            list: [],
+            list: [{
+                name: 'terminal',
+                title: 'Terminal'
+            }],
             runApp: (app) => set(state => ({ apps: [...state.apps, new Application(this, app)] })),
         }));
         this.xDialog = zustand(
